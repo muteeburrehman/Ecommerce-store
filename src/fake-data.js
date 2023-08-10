@@ -1,22 +1,22 @@
-import shoesImage1 from './assets/shoesImage1.jpg'
-import shoesImage2 from './assets/shoesImage2.jpg'
-import shoesImage3 from './assets/shoesImage3.jpg'
-import shoesImage4 from './assets/shoesImage4.jpg'
-import shoesImage5 from './assets/shoesImage5.jpg'
-import shoesImage6 from './assets/shoesImage6.jpg'
-import shoesImage7 from './assets/shoesImage7.jpg'
-import shoesImage8 from './assets/shoesImage8.jpg'
-import shoesImage9 from './assets/shoesImage9.jpg'
-import shoesImage10 from './assets/shoesImage10.jpg'
-import shoesImage11 from './assets/shoesImage11.jpg'
-import shoesImage12 from './assets/shoesImage12.jpg'
+import shoesImage1 from './assets/shoes-1.jpg'
+import shoesImage2 from './assets/shoes-2.jpg'
+import shoesImage3 from './assets/shoes-3.jpg'
+import shoesImage4 from './assets/shoes-4.jpg'
+import shoesImage5 from './assets/shoes-5.jpg'
+import shoesImage6 from './assets/shoes-6.jpg'
+import shoesImage7 from './assets/shoes-7.jpg'
+import shoesImage8 from './assets/shoes-8.jpg'
+import shoesImage9 from './assets/shoes-9.jpg'
+import shoesImage10 from './assets/shoes-10.jpg'
+import shoesImage11 from './assets/shoes-11.jpg'
+import shoesImage12 from './assets/shoes-12.jpg'
 
 export const products = [{
     id: '123',
     name: 'Running Shoes',
     price: '60.00',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim quam. Mauris nisl tellus, fringilla sed cursus eu, convallis non diam. Mauris quis fringilla nunc. Aenean leo lacus, lobortis sit amet venenatis a, aliquet tristique erat. Etiam laoreet mauris ut dapibus tincidunt. Pellentesque non ex at nisl ornare aliquam sed non ante. Nam lobortis magna id massa cursus, sit amet condimentum metus facilisis. Donec eu tortor at est tempor cursus et sed velit. Morbi rutrum elementum est vitae fringilla. Phasellus dignissim purus turpis, ac varius enim auctor vulputate. In ullamcorper vestibulum mauris. Nulla malesuada pretium mauris, lobortis eleifend dolor iaculis vitae.',
-    imageUrl: shoesImage1,
+    imageUrl:shoesImage1,
     averageRating: '5.0',
 }, {
     id: '234',
