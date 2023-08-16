@@ -1,13 +1,18 @@
 <template>
   <div id="page-wrap" v-if="product">
     <div id="img-wrap">
-      <img v-bind:src="product.imageUrl" />
+      <img v-bind:src="'http://localhost:8000' + product.imageUrl" />
     </div>
     <div id="product-details">
       <h1>{{ product.name }}</h1>
       <h3 id="price">${{ product.price }}</h3>
       <p>Average rating: {{ product.averageRating }}</p>
-      <button id="add-to-cart">Add to Cart</button>
+      <button
+          id="add-to-cart"
+          v-on:click="addToCart"
+          :disabled="addingToCart"
+      >{{ addToCartButtonText }}</button>
+
       <h4>Description</h4>
       <p>{{ product.description }}</p>
     </div>
@@ -16,7 +21,7 @@
 </template>
 
 <script>
-import { products } from '../fake-data';
+import axios from "axios";
 import NotFoundPage from "@/views/NotFoundPage.vue";
 
 export default {
@@ -24,8 +29,31 @@ export default {
   components: {NotFoundPage},
   data() {
     return {
-      product: products.find((p) => p.id === this.$route.params.id),
+      product: {},
+      addToCartButtonText: 'Add to Cart',
+      addingToCart: false,
     };
+  },
+  methods: {
+    async addToCart() {
+      this.addingToCart = true;
+      try {
+        await axios.post('http://localhost:8000/api/users/1/cart', {
+          product_id: this.$route.params.id,
+          quantity: 1
+        });
+        this.addToCartButtonText = 'Added to Cart';
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      } finally {
+        this.addingToCart = false;
+      }
+    }
+  },
+  async created() {
+    const result=await axios.get(`http://localhost:8000/api/products/${this.$route.params.id}`);
+    const product = result.data;
+    this.product=product;
   }
 };
 </script>
@@ -58,6 +86,7 @@ img {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
 #add-to-cart {
   width: 100%;
   padding: 10px;
@@ -72,6 +101,28 @@ img {
 #add-to-cart:hover {
   background-color: #2980b9;
 }
+
+#add-to-cart[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#add-to-cart.added {
+  background-color: #27ae60;
+}
+
+#add-to-cart.added:hover {
+  background-color: #219653;
+}
+
+#add-to-cart.success {
+  background-color: #2ecc71;
+}
+
+#add-to-cart.success:hover {
+  background-color: #27ae60;
+}
+
 
 #price {
   position: absolute;

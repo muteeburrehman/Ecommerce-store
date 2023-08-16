@@ -6,7 +6,6 @@
 
 <script>
 import axios from 'axios';
-//import { products } from '../fake-data';
 import ProductsGrid from '../components/ProductsGrid.vue';
 
 export default {
@@ -21,7 +20,7 @@ export default {
   },
   async created() {
     try {
-      const result = await axios.get('/api/products');
+      const result = await axios.get('http://localhost:8000/api/products');
       console.log('API response:', result.data); // Log the response data
       this.products = result.data;
     } catch (error) {

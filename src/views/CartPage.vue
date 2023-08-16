@@ -1,14 +1,13 @@
 <template>
   <div id="page-wrap">
     <h1 class="cart-heading">Your Shopping Cart</h1>
-    <ProductsList :products="products=cartItems"/>
-    <h3 id="total-price">Total: ${{ totalPrice }}</h3>
-    <button id="checkout-button">Proceed to Checkout</button>
+    <ProductsList :products="cartItems" />
+    <button id="checkout-button" v-if="cartItems.length > 0">Proceed to Checkout</button>
   </div>
 </template>
 
 <script>
-import { cartItems } from '../fake-data';
+import axios from "axios";
 import ProductsList from '../components/ProductsList.vue';
 
 export default {
@@ -18,17 +17,20 @@ export default {
   },
   data() {
     return {
-      cartItems,
+      cartItems: [],
+    };
+  },
+  async created() {
+    try {
+      const response = await axios.get('http://localhost:8000/api/users/1/cart');
+
+      if (response.status === 200) {
+        this.cartItems = response.data;
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
     }
   },
-  computed: {
-    totalPrice() {
-      return this.cartItems.reduce(
-          (sum, item) => sum + Number(item.price),
-          0,
-      );
-    }
-  }
 };
 </script>
 
@@ -43,12 +45,6 @@ h1 {
 
 .cart-heading {
   color: #333;
-}
-
-#total-price {
-  padding: 16px;
-  text-align: right;
-  font-size: 1.2rem;
 }
 
 #checkout-button {
