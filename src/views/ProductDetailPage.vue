@@ -9,15 +9,15 @@
       <p>Average rating: {{ product.averageRating }}</p>
       <button
           id="add-to-cart"
+          :class="[{'added': addToCartButtonText === 'Added to Cart'}, {'success': addToCartButtonText === 'Added to Cart'}]"
           v-on:click="addToCart"
           :disabled="addingToCart"
       >{{ addToCartButtonText }}</button>
-
       <h4>Description</h4>
       <p>{{ product.description }}</p>
     </div>
   </div>
-  <NotFoundPage v-else/>
+  <NotFoundPage v-else />
 </template>
 
 <script>
@@ -26,7 +26,7 @@ import NotFoundPage from "@/views/NotFoundPage.vue";
 
 export default {
   name: 'ProductDetailPage',
-  components: {NotFoundPage},
+  components: { NotFoundPage },
   data() {
     return {
       product: {},
@@ -51,9 +51,9 @@ export default {
     }
   },
   async created() {
-    const result=await axios.get(`http://localhost:8000/api/products/${this.$route.params.id}`);
+    const result = await axios.get(`http://localhost:8000/api/products/${this.$route.params.id}`);
     const product = result.data;
-    this.product=product;
+    this.product = product;
   }
 };
 </script>
@@ -71,9 +71,9 @@ export default {
 }
 
 img {
-  width: 100%; /* Make sure the image scales properly */
-  max-width: 400px; /* Limit the maximum width */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -85,7 +85,6 @@ img {
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 
 #add-to-cart {
   width: 100%;
@@ -123,7 +122,6 @@ img {
   background-color: #27ae60;
 }
 
-
 #price {
   position: absolute;
   top: 16px;
@@ -154,9 +152,5 @@ h4 {
 p {
   line-height: 1.6;
   color: #333;
-}
-
-#description {
-  margin-top: 16px;
 }
 </style>

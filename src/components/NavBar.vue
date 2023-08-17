@@ -1,7 +1,10 @@
 <template>
   <div id="nav-bar">
     <router-link to="/products" id="products-link">
-      <h1>FABULOUS FOOTWEAR</h1>
+      <div id="logo">
+        <img src="@/assets/logo.jpg" alt="Shoe Store Logo" />
+        <h1 class="site-title">SHOE HUNT</h1>
+      </div>
     </router-link>
     <router-link to="/cart" id="cart-link">
       <button>Shopping Cart</button>
@@ -12,7 +15,7 @@
 <script>
 export default {
   name: 'NavBar',
-}
+};
 </script>
 
 <style scoped>
@@ -34,16 +37,32 @@ export default {
   text-decoration: none;
 }
 
-#products-link h1 {
+#logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+#logo img {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.site-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  color: #333; /* Change the color as needed */
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 #cart-link {
   display: flex;
   align-items: center;
-  text-decoration: none; /* Remove text decoration */
+  text-decoration: none;
 }
 
 #cart-link button {
@@ -55,7 +74,7 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 14px;
-  outline: none; /* Remove button outline */
+  outline: none;
 }
 
 #cart-link button:hover {

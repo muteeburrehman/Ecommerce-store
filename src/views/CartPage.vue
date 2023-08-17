@@ -3,6 +3,9 @@
     <h1 class="cart-heading">Your Shopping Cart</h1>
     <ProductsList :products="cartItems" />
     <button id="checkout-button" v-if="cartItems.length > 0">Proceed to Checkout</button>
+    <router-link to="/products" class="continue-shopping-link" v-if="cartItems.length > 0">
+      Continue Shopping
+    </router-link>
   </div>
 </template>
 
@@ -64,5 +67,25 @@ h1 {
   background-color: #2980b9;
 }
 
+.continue-shopping-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #3498db;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border: 2px solid #3498db;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
 
+.continue-shopping-link:hover {
+  background-color: #3498db;
+  color: white;
+  transform: scale(1.05);
+}
+
+.continue-shopping-link:active {
+  transform: scale(0.98);
+}
 </style>
