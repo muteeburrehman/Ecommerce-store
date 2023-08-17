@@ -6,6 +6,11 @@
         <h1 class="site-title">SHOE HUNT</h1>
       </div>
     </router-link>
+    <div id="nav-links">
+      <router-link to="/login" class="nav-link">Login</router-link>
+      <router-link to="/products" class="nav-link">Home</router-link>
+      <router-link to="/register" class="nav-link">Register</router-link>
+    </div>
     <router-link to="/cart" id="cart-link">
       <button>Shopping Cart</button>
     </router-link>
@@ -54,9 +59,29 @@ export default {
   font-size: 28px;
   font-weight: bold;
   font-family: 'Arial', sans-serif;
-  color: #333; /* Change the color as needed */
+  color: #333;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+#nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #3498db;
 }
 
 #cart-link {

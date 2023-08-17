@@ -1,13 +1,256 @@
-
-
 <template>
-<div>
-
-</div>
+  <div class="container">
+    <div class="form">
+      <header>Login</header>
+      <form @submit.prevent="login">
+        <div class="field">
+          <input type="text" name="email" v-model="email" placeholder="Email" />
+        </div>
+        <div class="field">
+          <input type="password" name="password" v-model="password" placeholder="Password" />
+          <i class="eye-icon fas fa-eye-slash" @click="togglePasswordVisibility"></i>
+        </div>
+        <button class="login-button">Login</button>
+      </form>
+      <div class="form-link">
+        <span>Don't have an account?</span>
+        <a href="#">Register here</a>
+      </div>
+      <div class="line"></div>
+      <div class="media-options">
+        <a href="#" class="facebook">
+          <div class="facebook-icon">
+            <i class="fab fa-facebook-f"></i>
+          </div>
+          <span>Login with Facebook</span>
+        </a>
+        <a href="#" class="google">
+          <div class="google-img">
+            <img src="@/assets/google-icon.png" alt="Google Icon" />
+          </div>
+          <span>Login with Google</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
-<script setup>
 
+<script>
+import axios from "axios";
+import router from "@/router"; // Import the router object
+
+export default {
+  name: "SignupComp",
+  data() {
+    return {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      showPassword: false,
+    };
+  },
+  methods: {
+    async register() {
+      try {
+        let data = {
+          email: this.email,
+          password: this.password,
+        };
+        await axios.post("/api/register", data); // Replace with your registration endpoint
+        console.log("Registered");
+        router.push("/login"); // Redirect to the login page after successful registration
+      } catch (error) {
+        console.error("Registration failed", error);
+      }
+    },
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
+  },
+};
 </script>
-<style scoped>
 
+<style scoped>
+/* Global styles and imports */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Component styles */
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4070f4;
+  column-gap: 30px;
+}
+
+.form {
+  position: absolute;
+  max-width: 430px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 6px;
+  background: #FFF;
+}
+
+header {
+  font-size: 28px;
+  font-weight: 600;
+  color: #232836;
+  text-align: center;
+}
+
+form {
+  margin-top: 30px;
+}
+
+.field {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+
+.field input,
+.field button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 6px;
+}
+
+.field input {
+  outline: none;
+  padding: 0 15px;
+  border: 1px solid #cacaca;
+}
+
+.field input:focus {
+  border-bottom-width: 2px;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #8b8b8b;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.login-button {
+  color: #fff;
+  background-color: #0171d3;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.login-button:hover {
+  background-color: #016dcb;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-link span,
+.form-link a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #232836;
+}
+
+.form a {
+  color: #0171d3;
+  text-decoration: none;
+}
+
+.line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  margin: 36px 0;
+  background-color: #d4d4d4;
+}
+
+.line::before {
+  content: 'Or';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: #8b8b8b;
+  padding: 0 15px;
+}
+
+.media-options a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.facebook {
+  color: #fff;
+  background-color: #4267b2;
+  margin-top: 20px; /* Adjust margin for spacing */
+  padding: 10px 20px; /* Adjust padding for spacing */
+}
+
+a.facebook .facebook-icon {
+  height: 28px;
+  width: 28px;
+  color: #0171d3;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.facebook-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+a.google {
+  border: 1px solid #cacaca;
+  margin-top: 10px; /* Adjust margin for spacing */
+  padding: 10px 20px; /* Adjust padding for spacing */
+}
+
+a.google span {
+  font-weight: 500;
+  opacity: 0.6;
+  color: #232836;
+}
+
+/* Media queries and other adjustments */
+@media screen and (max-width: 400px) {
+  .form {
+    padding: 20px 10px;
+  }
+}
 </style>
