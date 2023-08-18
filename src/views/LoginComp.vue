@@ -10,22 +10,26 @@
           <input type="password" name="password" v-model="password" placeholder="Password" />
           <i class="eye-icon fas fa-eye-slash" @click="togglePasswordVisibility"></i>
         </div>
-        <button class="login-button">Login</button>
+        <div class="field button-container">
+          <button class="login-button">Login</button>
+        </div>
       </form>
+
       <div class="form-link">
-        <span>Don't have an account?</span>
-        <a href="#">Register here</a>
+        <span>Don't have an account? </span>
+        <!-- Use router-link instead of <a> -->
+        <router-link to="/register" class="nav-link">Signup</router-link>
       </div>
       <div class="line"></div>
       <div class="media-options">
         <a href="#" class="facebook">
           <div class="facebook-icon">
-            <i class="fab fa-facebook-f"></i>
+            <img src="@/assets/fb.png" alt="Facebook Icon" />
           </div>
           <span>Login with Facebook</span>
         </a>
         <a href="#" class="google">
-          <div class="google-img">
+          <div class="google-icon">
             <img src="@/assets/google-icon.png" alt="Google Icon" />
           </div>
           <span>Login with Google</span>
@@ -40,27 +44,26 @@ import axios from "axios";
 import router from "@/router"; // Import the router object
 
 export default {
-  name: "SignupComp",
+  name: "LoginComp",
   data() {
     return {
       email: "",
       password: "",
-      confirmPassword: "",
       showPassword: false,
     };
   },
   methods: {
-    async register() {
+    async login() {
       try {
         let data = {
           email: this.email,
           password: this.password,
         };
-        await axios.post("/api/register", data); // Replace with your registration endpoint
-        console.log("Registered");
-        router.push("/login"); // Redirect to the login page after successful registration
+        await axios.post("/api/login", data); // Replace with your login endpoint
+        console.log("Logged in");
+        router.push("/products"); // Redirect to the dashboard after successful login
       } catch (error) {
-        console.error("Registration failed", error);
+        console.error("Login failed", error);
       }
     },
     togglePasswordVisibility() {
@@ -151,6 +154,13 @@ form {
   padding: 5px;
 }
 
+/* Adjusted styles for button placement */
+.field.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
 .login-button {
   color: #fff;
   background-color: #0171d3;
@@ -167,85 +177,87 @@ form {
   background-color: #016dcb;
 }
 
-.form-link {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.form-link span,
-.form-link a {
-  font-size: 14px;
-  font-weight: 400;
-  color: #232836;
-}
-
-.form a {
-  color: #0171d3;
-  text-decoration: none;
-}
-
-.line {
-  position: relative;
-  height: 1px;
-  width: 100%;
-  margin: 36px 0;
-  background-color: #d4d4d4;
-}
-
-.line::before {
-  content: 'Or';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: #8b8b8b;
-  padding: 0 15px;
+/* Styles for social media options */
+.media-options {
+  margin-top: 20px;
 }
 
 .media-options a {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-a.facebook {
   color: #fff;
-  background-color: #4267b2;
-  margin-top: 20px; /* Adjust margin for spacing */
-  padding: 10px 20px; /* Adjust padding for spacing */
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
-a.facebook .facebook-icon {
+.media-options a:hover {
+  background-color: #f0f0f0;
+  color: #232836;
+}
+
+.facebook {
+  background-color: #4267b2;
+}
+
+.facebook-icon {
   height: 28px;
   width: 28px;
-  color: #0171d3;
-  font-size: 20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
+  margin-right: 10px;
 }
 
-.facebook-icon {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
+.facebook-icon img {
+  width: 100%;
+  height: 100%;
 }
 
-a.google {
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  background: #DD4B39;
+  border-radius: 6px;
+  margin-top: 10px;
+  padding: 10px 20px;
   border: 1px solid #cacaca;
-  margin-top: 10px; /* Adjust margin for spacing */
-  padding: 10px 20px; /* Adjust padding for spacing */
+  transition: background-color 0.3s ease;
+  font-weight: 500;
 }
 
-a.google span {
-  font-weight: 500;
-  opacity: 0.6;
-  color: #232836;
+.google-icon {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  margin-right: 10px;
 }
+
+.google-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.google:hover {
+  background: #E74B37;
+}
+
+/* Rest of your styles... */
 
 /* Media queries and other adjustments */
 @media screen and (max-width: 400px) {

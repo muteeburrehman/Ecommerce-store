@@ -9,7 +9,7 @@
     <div id="nav-links">
       <router-link to="/login" class="nav-link">Login</router-link>
       <router-link to="/products" class="nav-link">Home</router-link>
-      <router-link to="/register" class="nav-link">Register</router-link>
+      <router-link to="/register" class="nav-link">Signup</router-link>
     </div>
     <router-link to="/cart" id="cart-link">
       <button>Shopping Cart</button>
