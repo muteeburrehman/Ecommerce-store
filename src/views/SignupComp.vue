@@ -28,7 +28,7 @@
       </div>
       <div class="line"></div>
       <div class="media-options">
-        <a href="#" class="field facebook">
+        <a href="http://localhost:8000/login/facebook" class="field facebook">
           <div class="background-container">
             <img src="@/assets/fb.png" alt="Facebook Icon" class="facebook-icon">
           </div>
@@ -36,7 +36,7 @@
         </a>
       </div>
       <div class="media-options">
-        <a href="#" class="field google">
+        <a href="http://localhost:8000/login/google" class="field google">
           <div class="background-container">
             <img src="@/assets/google-icon.png" alt="Google Icon" class="google-icon">
           </div>
@@ -83,6 +83,7 @@ export default {
       this.showPassword = !this.showPassword;
     },
   },
+
 };
 </script>
 <style scoped>
@@ -288,7 +289,16 @@ form {
 .google:hover {
   background: #E74B37;
 }
-
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4070f4;
+  column-gap: 30px;
+  margin-top: 60px; /* Adjust this value based on your TopBar height */
+}
 /* Rest of your styles... */
 
 /* Media queries and other adjustments */
